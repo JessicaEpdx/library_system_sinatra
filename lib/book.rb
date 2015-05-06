@@ -10,6 +10,7 @@ attr_reader(:title, :author, :id)
   def save
     result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
     @id = result.first().fetch("id").to_i
+    DB.exec("INSERT INTO copies (number_of_copies, book_id) VALUES (1, #{@id});")
   end
 
   def self.all
@@ -71,6 +72,11 @@ attr_reader(:title, :author, :id)
 
   def delete
     DB.exec("DELETE FROM books WHERE id = #{self.id()};")
+    DB.exec("DELETE FROM copies WHERE book_id = #{self.id()};")
+  end
+
+  def copies
+
   end
 
 
