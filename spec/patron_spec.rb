@@ -19,4 +19,13 @@ describe(Patron) do
     end
   end
 
+  describe('#delete') do
+    it("will delete a patron and all checked out books by that patron") do
+      test_patron = Patron.new({:name => "Rebecca", :id => nil})
+      test_patron.save()
+      test_patron.delete()
+      expect(Patron.all()).to(eq([]))
+    end
   end
+
+end

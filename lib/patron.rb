@@ -32,4 +32,9 @@ class Patron
     DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{@id};")
   end
 
+  def delete
+    DB.exec("DELETE FROM patrons WHERE id = #{self.id()};")
+    DB.exec("DELETE FROM checked_out WHERE patron_id = #{self.id()};")
+  end
+
 end
