@@ -100,5 +100,13 @@ end
     end
   end
 
+  describe('#add_copies') do
+    it("allows user to add copies already existing book") do
+      test_book = Book.new({:title => "Sirens of Titan", :author => "Kurt Vonnegut", :id => nil})
+      test_book.save()
+      test_book.add_copies(2)
+      expect(test_book.copies()).to(eq(3))
+    end
+  end
 
 end

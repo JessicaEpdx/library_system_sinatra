@@ -80,6 +80,15 @@ attr_reader(:title, :author, :id)
     result.first().fetch("number_of_copies").to_i
   end
 
+  def add_copies (adding_copies)
+    all_copies = self.copies() + adding_copies
+    DB.exec("UPDATE copies SET number_of_copies = #{all_copies} WHERE book_id = #{self.id()};")
+  end
+
+
+
+
+
 
 
 end
