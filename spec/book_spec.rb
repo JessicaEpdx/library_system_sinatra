@@ -97,8 +97,6 @@ end
       test_book = Book.new({:title => "Sirens of Titan", :author => "Kurt Vonnegut", :id => nil})
       test_book.save()
       expect(test_book.copies()).to(eq(1))
-      test_book.delete()
-      expect(test_book.copies()).to(eq(0))
     end
   end
 

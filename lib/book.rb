@@ -76,7 +76,8 @@ attr_reader(:title, :author, :id)
   end
 
   def copies
-
+    result = DB.exec("SELECT number_of_copies FROM copies WHERE book_id = #{self.id};")
+    result.first().fetch("number_of_copies").to_i
   end
 
 
