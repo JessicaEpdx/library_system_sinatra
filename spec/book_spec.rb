@@ -44,13 +44,33 @@ end
     end
   end
 
-  describe('.find') do
+  describe('.find_id') do
     it("will return a book by book id") do
       test_book = Book.new({:title => "Going Up", :author => "Shel Silverstein", :id => nil})
       test_book2 = Book.new({:title => "Pirate Book", :author => "Shel Pirate", :id => nil})
       test_book.save()
       test_book2.save()
-      expect(Book.find(test_book2.id)).to(eq([test_book2]))
+      expect(Book.find_id(test_book2.id)).to(eq([test_book2]))
+    end
+  end
+
+  describe('.find_title') do
+    it("will return a book by book title") do
+      test_book = Book.new({:title => "Going Up", :author => "Shel Silverstein", :id => nil})
+      test_book2 = Book.new({:title => "Going Up", :author => "Rob Lowe", :id => nil})
+      test_book.save()
+      test_book2.save()
+      expect(Book.find_title(test_book2.title)).to(eq([test_book, test_book2]))
+    end
+  end
+
+  describe('.find_author') do
+    it("will return a book by book author") do
+      test_book = Book.new({:title => "Going Up", :author => "Shel Silverstein", :id => nil})
+      test_book2 = Book.new({:title => "Pirate Book", :author => "Shel Silverstein", :id => nil})
+      test_book.save()
+      test_book2.save()
+      expect(Book.find_author(test_book.author)).to(eq([test_book, test_book2]))
     end
   end
 

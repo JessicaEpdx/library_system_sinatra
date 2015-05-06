@@ -28,7 +28,7 @@ attr_reader(:title, :author, :id)
     self.author() == other_book.author() && self.title() == other_book.title()
   end
 
-  def self.find (given_id)
+  def self.find_id (given_id)
     found_book = []
     result = DB.exec("SELECT * FROM books WHERE id = #{given_id};")
     result.each() do |book|
@@ -37,6 +37,28 @@ attr_reader(:title, :author, :id)
       found_book.push(Book.new({:title => title, :author => author, :id => given_id}))
     end
     found_book
+  end
+
+  def self.find_title (given_title)
+    found_books = []
+    results = DB.exec("SELECT * FROM books WHERE title = '#{given_title}';")
+    results.each() do |book|
+      author = book.fetch("author")
+      id = book.fetch("id").to_i()
+      found_books.push(Book.new({:title => given_title, :author => author, :id => id}))
+    end
+    found_books
+  end
+
+  def self.find_author (given_author)
+    found_books = []
+    results = DB.exec("SELECT * FROM books WHERE author = '#{given_author}';")
+    results.each() do |book|
+      title = book.fetch("title")
+      id = book.fetch("id").to_i()
+      found_books.push(Book.new({:title => title, :author => given_author, :id => id}))
+    end
+    found_books
   end
 
   def update (attributes)
