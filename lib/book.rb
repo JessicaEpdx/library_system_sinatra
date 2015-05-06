@@ -28,5 +28,16 @@ attr_reader(:title, :author, :id)
     self.author() == other_book.author() && self.title() == other_book.title()
   end
 
+  def self.find (given_id)
+    found_book = []
+    result = DB.exec("SELECT * FROM books WHERE id = #{given_id};")
+    result.each() do |book|
+      title = book.fetch("title")
+      author = book.fetch("author")
+      found_book.push(Book.new({:title => title, :author => author, :id => given_id}))
+    end
+    found_book
+  end
+
 
 end
