@@ -47,6 +47,10 @@ attr_reader(:title, :author, :id)
     DB.exec("UPDATE books SET author = '#{@author}' WHERE id = #{@id};")
   end
 
+  def delete
+    DB.exec("DELETE FROM books WHERE id = #{self.id()};")
+  end
+
 
 
 end
