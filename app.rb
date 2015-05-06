@@ -12,5 +12,14 @@ get('/') do
 end
 
 get('/librarian') do
+  @books = Book.all()
+  erb(:librarian)
+end
+
+post('/books/new') do
+  title = params.fetch("title")
+  author = params.fetch("author")
+  Book.new({:title => title, :author => author, :id => nil}).save()
+  @books = Book.all()
   erb(:librarian)
 end
