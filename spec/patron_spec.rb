@@ -17,6 +17,30 @@ describe(Patron) do
       test_patron.update({:name => "Sally"})
       expect(test_patron.name()).to(eq("Sally"))
     end
+
+    it("allow user to check out a books") do
+      test_patron = Patron.new({:name => "Cheyanne", :id => nil})
+      test_patron.save()
+      book = Book.new({:title => "Oryx and Crake", :author => "Margaret Atwell", :id => nil})
+      book.save()
+      book2 = Book.new({:title => "Way of Kings", :author => "Brandon Sanderson", :id => nil})
+      book2.save()
+      test_patron.update({:checked_out_books => [book.id(), book2.id()]})
+      expect(test_patron.books()).to(eq([book, book2]))
+    end
+  end
+
+  describe('#books') do
+    it("will return all books check out by a patron") do
+      test_patron = Patron.new({:name => "Cheyanne", :id => nil})
+      test_patron.save()
+      book = Book.new({:title => "Oryx and Crake", :author => "Margaret Atwell", :id => nil})
+      book.save()
+      book2 = Book.new({:title => "Way of Kings", :author => "Brandon Sanderson", :id => nil})
+      book2.save()
+      test_patron.update({:checked_out_books => [book.id(), book2.id()]})
+      expect(test_patron.books()).to(eq([book, book2]))
+    end
   end
 
   describe('#delete') do
@@ -27,5 +51,7 @@ describe(Patron) do
       expect(Patron.all()).to(eq([]))
     end
   end
+
+
 
 end
