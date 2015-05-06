@@ -26,4 +26,10 @@ class Patron
     self.id() == other_patron.id()
   end
 
+  def update (attributes)
+    @name = attributes.fetch(:name, @name)
+    @id = self.id()
+    DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
 end

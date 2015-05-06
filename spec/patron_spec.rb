@@ -10,5 +10,13 @@ describe(Patron) do
     end
   end
 
+  describe('#update') do
+    it("allow user to update name") do
+      test_patron = Patron.new({:name => "Bob", :id => nil})
+      test_patron.save()
+      test_patron.update({:name => "Sally"})
+      expect(test_patron.name()).to(eq("Sally"))
+    end
+  end
 
   end
