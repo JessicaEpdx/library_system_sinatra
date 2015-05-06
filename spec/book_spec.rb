@@ -54,4 +54,13 @@ end
     end
   end
 
+  describe('#update') do
+    it("lets you update books in the database") do
+      test_book = Book.new({:title => "Going Up", :author => "Shel Silverstein", :id => nil})
+      test_book.save()
+      test_book.update({:title => "That Killer Book"})
+      expect(test_book.title()).to(eq("That Killer Book"))
+    end
+  end
+
 end

@@ -39,5 +39,14 @@ attr_reader(:title, :author, :id)
     found_book
   end
 
+  def update (attributes)
+    @title = attributes.fetch(:title, @title)
+    @author = attributes.fetch(:author, @author)
+    @id = self.id()
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
+    DB.exec("UPDATE books SET author = '#{@author}' WHERE id = #{@id};")
+  end
+
+
 
 end
